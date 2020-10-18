@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using VaR.Entities;
 
 namespace VaR
@@ -18,6 +19,7 @@ namespace VaR
         List<Tick> Ticks;
 
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+
         public Form1()
         {
             InitializeComponent();
@@ -67,6 +69,43 @@ namespace VaR
                 value += (decimal)last.Price * item.Volume;
             }
             return value;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.Filter = "Comma Seperated Values (*.csv)|*.csv";
+            sfd.DefaultExt = "csv";
+            sfd.AddExtension = true;
+
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+            {
+                sw.Write("Időszak; Nyereség");
+                sw.WriteLine();
+                List<decimal> Nyereségek = new List<decimal>();
+                int intervalum = 30;
+                DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
+                DateTime záróDátum = new DateTime(2016, 12, 30);
+                TimeSpan z = záróDátum - kezdőDátum;
+                for (int i = 0; i < z.Days - intervalum; i++)
+                {
+                    decimal ny = GetPortfolioValue(kezdőDátum.AddDays(i + intervalum))
+                               - GetPortfolioValue(kezdőDátum.AddDays(i));
+                    Nyereségek.Add(ny);
+                }
+                var nyereségekRendezve = (from x in Nyereségek
+                                          orderby x
+                                          select x)
+                            .ToList();
+                for (int i = 0; i < nyereségekRendezve.Count; i++)
+                {
+                    sw.Write(i + "; " + nyereségekRendezve[i]);
+                    sw.WriteLine();
+                }
+            }
         }
     }
 }
