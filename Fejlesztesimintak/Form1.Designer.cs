@@ -36,6 +36,7 @@ namespace Fejlesztesimintak
             this.car = new System.Windows.Forms.Button();
             this.ball = new System.Windows.Forms.Button();
             this.lblNext = new System.Windows.Forms.Label();
+            this.btnColor = new System.Windows.Forms.Button();
             this.mainPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@ namespace Fejlesztesimintak
             // 
             // mainPanel1
             // 
+            this.mainPanel1.Controls.Add(this.btnColor);
             this.mainPanel1.Controls.Add(this.lblNext);
             this.mainPanel1.Controls.Add(this.ball);
             this.mainPanel1.Controls.Add(this.car);
@@ -91,6 +93,15 @@ namespace Fejlesztesimintak
             this.lblNext.TabIndex = 2;
             this.lblNext.Text = "Coming next:";
             // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(68, 228);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(75, 23);
+            this.btnColor.TabIndex = 3;
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(811, 422);
@@ -111,6 +122,7 @@ namespace Fejlesztesimintak
         private System.Windows.Forms.Label lblNext;
         private System.Windows.Forms.Button ball;
         private System.Windows.Forms.Button car;
+        private System.Windows.Forms.Button btnColor;
     }
 }
 

@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\IToyFactory.cs" />
+    <Compile Include="Abstractions\IToyFactory.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Abstractions\Toy.cs">
       <SubType>Component</SubType>
     </Compile>
