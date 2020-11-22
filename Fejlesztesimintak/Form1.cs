@@ -17,6 +17,8 @@ namespace Fejlesztesimintak
     {
         private List<Toy> _toys = new List<Toy>();
 
+        private Toy _nextToy;
+
         private IToyFactory _factory;
         public IToyFactory Factory
         {
@@ -53,6 +55,26 @@ namespace Fejlesztesimintak
                 mainPanel1.Controls.Remove(oldestToy);
                 _toys.Remove(oldestToy);
             }
+        }
+
+        private void car_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void ball_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+                Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = lblNext.Top + lblNext.Height + 20;
+            _nextToy.Left = lblNext.Left;
+            Controls.Add(_nextToy);
         }
     }
 }
