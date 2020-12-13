@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Webszolgaltatas.Entities
 {
-    class RateData
+    public class RateData
     {
-        DateTime Date;
-        String Currency;
-        Decimal Value;
+        public DateTime Date;
+        public String Currency;
+        public Decimal Value;
     }
 }
